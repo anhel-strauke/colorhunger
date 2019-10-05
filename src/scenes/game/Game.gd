@@ -15,6 +15,8 @@ const hero_h_speed = 12.0
 const hero_v_speed = 8.0
 const level_speed = 6.0
 
+onready var hero_color = $UI/HeroColor
+
 func _input(event):
 	if event.is_action_pressed("ui_up"):
 		hero.v_accel = -hero_v_speed
@@ -41,6 +43,7 @@ func _ready():
 	var vp_size = get_tree().get_root().size
 	var half_w = vp_size.x * half_h / vp_size.y
 	screen_width = half_w * 2
+	$Hero.clear_color()
 	$Hero.level_bound_x_min = -(half_w - 1)
 	$Hero.level_bound_x_max = half_w - 1
 	$Hero.level_bound_z_min = -(half_h - 1)
@@ -64,3 +67,7 @@ func _process(delta):
 	$LevelRoot/AutoGenLevel.update_visibility(-level_pos, screen_width)
 	
 	
+
+func _on_Hero_color_updated(col):
+	if hero_color:
+		hero_color.color = col

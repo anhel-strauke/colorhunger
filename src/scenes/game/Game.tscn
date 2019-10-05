@@ -23,3 +23,12 @@ fov = 55.0
 
 [node name="AutoGenLevel" parent="LevelRoot" instance=ExtResource( 3 )]
 level_length = 400.0
+
+[node name="UI" type="Control" parent="."]
+anchor_bottom = 1.0
+margin_right = 40.0
+
+[node name="HeroColor" type="ColorRect" parent="UI"]
+anchor_bottom = 1.0
+margin_right = 40.0
+[connection signal="color_updated" from="Hero" to="." method="_on_Hero_color_updated"]

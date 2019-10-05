@@ -69,7 +69,6 @@ func _make_items(items_count: int):
 
 
 func kill_item(item):
-	print("Killing item ", item.name, " #", item.get_index())
 	var index = items.find(item)
 	if index >= 0:
 		items.remove(index)

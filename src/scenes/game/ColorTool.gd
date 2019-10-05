@@ -1,89 +1,92 @@
 extends Node
 
-
-const d = [
-	[
-		[
-			[1, 1, 1],
-			[0.163, 0.373, 0.6]
-		],
-		[
-			[1, 1, 0],
-			[0, 0.66, 0.2],
-		]
-	],
-	[
-		[
-			[1, 0, 0],
-			[0.5, 0.5, 0]
-		],
-		[
-			[1, 0.5, 0],
-			[0.2, 0.094, 0]
-		]
-	]
-]
-
-const t = [
-	[
-		[
-			[1, 1, 1],
-			[0, 0, 1]
-		],
-		[
-			[0, 1, 0.483],
-			[0, 0.053, 0.21]
-		]
-	],
-	[
-		[
-			[1, 0, 0],
-			[0.309, 0, 0.469]
-		],
-		[
-			[0, 1, 0],
-			[0, 0, 0]
-		]
-	]
-]
-
-
-func ryb2rgb(ryb):
-	var r = ryb[0]
-	var y = ryb[1]
-	var b = ryb[2]
-	var rs = [0, 0, 0]
-	for i in range(3):
-		rs[i] = (d[0][0][0][i] * (1 - r) * (1 - y) * (1 - b) +
-				d[0][0][1][i] * (1 - r) * (1 - y) * b +
-				d[0][1][0][i] * (1 - r) * y * (1 - b) +
-				d[1][0][0][i] * r * (1 - y) * (1 - b) +
-				d[0][1][1][i] * (1 - r) * y * b +
-				d[1][0][1][i] * r * (1 - y) * b +
-				d[1][1][0][i] * r * y * (1 - b) +
-				d[1][1][1][i] * r * y * b)
-	return rs
-
-
-func rgb2ryb(rgb):
+func _rgb2ryb(rgb):
 	var r = rgb[0]
 	var g = rgb[1]
 	var b = rgb[2]
-	var rs = [0, 0, 0]
-	for i in range(3):
-		rs[i] = (t[0][0][0][i] * (1 - r) * (1 - g) * (1 - b) +
-				t[0][0][1][i] * (1 - r) * (1 - g) * b +
-				t[0][1][0][i] * (1 - r) * g * (1 - b) +
-				t[1][0][0][i] * r * (1 - g) * (1 - b) +
-				t[0][1][1][i] * (1 - r) * g * b +
-				t[1][0][1][i] * r * (1 - g) * b +
-				t[1][1][0][i] * r * g * (1 - b) +
-				t[1][1][1][i] * r * g * b)
-	return rs
-	
-	
+	# Remove the whiteness from the color.
+	var w = [r, g, b].min()
+	r = r - w
+	g = g - w
+	b = b - w
+
+	var mg = [r, g, b].max()
+
+	# Get the yellow out of the red+green.
+	var y = min(r, g)
+	r -= y
+	g -= y
+
+	# If this unfortunate conversion combines blue and green, then cut each in half to preserve the value's maximum range.
+	if b > 0.0 and g > 0.0:
+		b /= 2.0
+		g /= 2.0
+
+	# Redistribute the remaining green.
+	y += g
+	b += g
+
+	# Normalize to values.
+	var my = [r, y, b].max()
+	if my > 0.0:
+		var n = mg / my
+		r *= n
+		y *= n
+		b *= n
+
+	# Add the white back in.
+	r += w
+	y += w
+	b += w
+
+	# And return back the ryb typed accordingly.
+	return [r, y, b]
+
+
+# Convert a red-yellow-blue system to a red-green-blue system.
+func _ryb2rgb(ryb):
+	var r = ryb[0]
+	var y = ryb[1]
+	var b = ryb[2]
+	# Remove the whiteness from the color.
+	var w = [r, y, b].min()
+	r = r - w
+	y = y - w
+	b = b - w
+
+	var my = [r, y, b].max()
+
+	# Get the green out of the yellow and blue
+	var g = min(y, b)
+	y -= g
+	b -= g
+
+	if b > 0.0 and g > 0.0:
+		b *= 2.0
+		g *= 2.0
+
+	# Redistribute the remaining yellow.
+	r += y
+	g += y
+
+	# Normalize to values.
+	var mg = [r, g, b].max()
+	if mg > 0.0:
+		var n = my / mg
+		r *= n
+		g *= n
+		b *= n
+
+	# Add the white back in.
+	r += w
+	g += w
+	b += w
+
+	# And return back the ryb typed accordingly.
+	return [r, g, b]
+
 # Array of pairs [[R, Y, B], W]
-func mix_ryb_colors(weighted_cols):
+func _mix_ryb_colors(weighted_cols):
 	var res = [0, 0, 0]
 	for wc_pair in weighted_cols:
 		var c = wc_pair[0]
@@ -91,8 +94,9 @@ func mix_ryb_colors(weighted_cols):
 		for i in range(3):
 			res[i] += c[i] * w
 	var m = res.max()
-	for i in range(3):
-		res[i] = res[i] / m
+	if m > 0:
+		for i in range(3):
+			res[i] = res[i] / m
 	return res
 
 # weighted_colors is array of [Color, weight]
@@ -102,8 +106,8 @@ func mix_colors(weighted_colors: Array) -> Color:
 		var col: Color = weighted_col[0]
 		var w: float = weighted_col[1]
 		var rgb = [col.r, col.g, col.b]
-		var ryb = rgb2ryb(rgb)
+		var ryb = _rgb2ryb(rgb)
 		w_ryb.append([ryb, w])
-	var mix_ryb = mix_ryb_colors(w_ryb)
-	var mix_rgb = ryb2rgb(mix_ryb)
+	var mix_ryb = _mix_ryb_colors(w_ryb)
+	var mix_rgb = _ryb2rgb(mix_ryb)
 	return Color(mix_rgb[0], mix_rgb[1], mix_rgb[2])
