@@ -58,7 +58,6 @@ func _make_items(items_count: int):
 	for i in range(items_count):
 		var new_item: Spatial = item_resources[0].instance()
 		new_item.set_color(random_colors[randi() % len(random_colors)])
-		print("New item, color: ", new_item.color)
 		var z_pos = rand_range(-3.5, 3.5)
 		var x_pos = rand_range(0.0, real_level_length)
 		self.add_child(new_item)
