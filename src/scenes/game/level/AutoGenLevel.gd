@@ -3,6 +3,7 @@ extends Spatial
 var tiles = []
 var real_level_length: float = 0.0
 var items = []
+var portal = null
 
 export var level_length: float = 0.0
 
@@ -22,6 +23,8 @@ onready var random_colors = [
 	Color(0.0, 1.0, 0.0),
 	Color(0.0, 0.0, 1.0)
 ]
+
+onready var portal_res = preload("res://scenes/game/level/objects/Portal.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,7 +64,7 @@ func _make_items(items_count: int):
 	for i in range(items_count):
 		var new_item: Spatial = item_resources[0].instance()
 		var z_pos = rand_range(-3.5, 3.5)
-		var x_pos = rand_range(0.0, real_level_length)
+		var x_pos = rand_range(0.0, real_level_length - 12)
 		self.add_child(new_item)
 		new_item.set_color(random_colors[randi() % len(random_colors)])
 		new_item.translation = Vector3(x_pos, 4.0, z_pos)
@@ -77,9 +80,19 @@ func kill_item(item):
 		item.queue_free()
 
 
+func _make_portal():
+	if portal:
+		remove_child(portal)
+		portal.queue_free()
+	portal = portal_res.instance()
+	add_child(portal)
+	portal.translation = Vector3(real_level_length - 6.0, 4.0, 0.0)
+
+
 func generate_level(length: float, items: int):
 	_make_floor(length)
 	_make_items(items)
+	_make_portal()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

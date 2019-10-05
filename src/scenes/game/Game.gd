@@ -10,14 +10,19 @@ onready var level_root = $LevelRoot
 var hero_rel_pos: Vector3
 var level_pos: float = 0
 var screen_width
+var controls_enabled = true
 
 const hero_h_speed = 12.0
 const hero_v_speed = 8.0
-const level_speed = 6.0
+const level_speed_base = 6.0
+
+var level_speed = level_speed_base
 
 onready var hero_color = $UI/HeroColor
 
 func _input(event):
+	if not controls_enabled:
+		return
 	if event.is_action_pressed("ui_up"):
 		hero.v_accel = -hero_v_speed
 	if event.is_action_pressed("ui_down"):
@@ -67,6 +72,9 @@ func _process(delta):
 	level_root.translation = Vector3(level_pos, 0, 0)
 	$LevelRoot/AutoGenLevel.update_visibility(-level_pos, screen_width)
 	
+	if level_pos - hero_rel_pos.x < -($LevelRoot/AutoGenLevel.real_level_length - 6):
+		level_speed = 0.0
+		controls_enabled = false
 	
 
 func _on_Hero_color_updated(col):
