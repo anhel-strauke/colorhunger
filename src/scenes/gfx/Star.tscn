@@ -10,6 +10,8 @@
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68816, 0.666598, 0 )
 light_cull_mask = 4294443008
+omni_range = 2.4
+omni_attenuation = 0.287174
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
@@ -19,3 +21,5 @@ script = ExtResource( 2 )
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40725, -1.04919, 0.967176 )
 light_cull_mask = 4294443008
+omni_range = 2.5718
+omni_attenuation = 0.210224

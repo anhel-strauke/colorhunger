@@ -28,7 +28,7 @@ func try_move(hero_delta: Vector3):
 
 
 func set_position(x: float, z: float) -> Vector3:
-	var new_pos = Vector3(x, 1.0, z)
+	var new_pos = Vector3(x, 4.0, z)
 	if x < level_bound_x_min:
 		new_pos.x = level_bound_x_min
 	elif x > level_bound_x_max:

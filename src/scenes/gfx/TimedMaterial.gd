@@ -42,7 +42,7 @@ func setColor(newColor: Vector3):
 	material.set_shader_param("color2", color);
 
 func moveLight():
-	light.translation = Vector3(lightDist * sin(time), lightDist * cos(time), 0.0);
+	light.translation = Vector3(lightDist * sin(time), lightDist * cos(time)/3.0, 0.0);
 	if light2:
 		light2.translation = Vector3(lightDist2 * sin(time*3.0), 0.0, lightDist2 * cos(time*2.0));
 

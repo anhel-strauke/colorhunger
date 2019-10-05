@@ -7,9 +7,10 @@ var items = []
 export var level_length: float = 0.0
 
 onready var tile_resources = [
-	preload("res://scenes/game/level/tiles/test_tile_1.tscn"),
+	#preload("res://scenes/game/level/tiles/test_tile_1.tscn"),
 	preload("res://scenes/game/level/tiles/test_tile_2.tscn"),
-	preload("res://scenes/game/level/tiles/test_tile_3.tscn"),
+	#preload("res://scenes/game/level/tiles/test_tile_3.tscn"),
+	preload("res://scenes/game/level/tiles/test_tile_4.tscn"),
 ]
 
 onready var item_resources = [
@@ -63,7 +64,7 @@ func _make_items(items_count: int):
 		var z_pos = rand_range(-3.5, 3.5)
 		var x_pos = rand_range(0.0, real_level_length)
 		self.add_child(new_item)
-		new_item.translation = Vector3(x_pos, 1.0, z_pos)
+		new_item.translation = Vector3(x_pos, 4.0, z_pos)
 		new_item.connect("kill_me", self, "kill_item")
 		items.append(new_item)
 
