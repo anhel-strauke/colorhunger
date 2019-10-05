@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/Level.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Hero" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4 )
+level_bound_x_min = -7.0
+level_bound_x_max = 7.0
+level_bound_z_min = -4.0
+level_bound_z_max = 4.0
+
+[node name="GameCamera" type="Camera" parent="."]
+transform = Transform( 1, -0.000315535, -1.52901e-05, 0, -0.0484011, 0.998828, -0.000315905, -0.998828, -0.0484011, 0, 10.5237, 0.00796491 )
+current = true
+fov = 55.2

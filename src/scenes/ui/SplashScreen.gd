@@ -4,7 +4,7 @@ extends Control
 # var a = 2
 # var b = "text"
 
-export var next_scene: String = ""
+export(String var next_scene = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
