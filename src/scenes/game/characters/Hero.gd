@@ -13,7 +13,7 @@ export var level_bound_z_max: float
 
 
 func set_position(x: float, z: float) -> Vector3:
-	var new_pos = Vector3(x, 0, z)
+	var new_pos = Vector3(x, 1.0, z)
 	if x < level_bound_x_min:
 		new_pos.x = level_bound_x_min
 	elif x > level_bound_x_max:
