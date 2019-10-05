@@ -35,3 +35,7 @@ func _on_ExitButton_pressed():
 
 func _on_CreditsButton_pressed():
 	get_tree().change_scene("res://scenes/ui/Credits.tscn")
+
+
+func _on_StartButton_pressed():
+	get_tree().change_scene("res://scenes/game/Game.tscn")

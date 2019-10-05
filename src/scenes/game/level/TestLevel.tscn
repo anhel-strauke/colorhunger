@@ -9,7 +9,7 @@ uv1_scale = Vector3( 1, 10, 1 )
 [node name="TestLevel" type="Spatial"]
 
 [node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5715, -1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.148, -1, 0 )
 width = 110.354
 height = 1.06
 depth = 14.941

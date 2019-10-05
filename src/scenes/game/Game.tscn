@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/game/level/TestLevel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/level/AutoGenLevel.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
@@ -15,14 +15,11 @@ level_bound_z_min = -4.0
 level_bound_z_max = 4.0
 
 [node name="GameCamera" type="Camera" parent="."]
-transform = Transform( 1, -0.000315535, -1.52901e-05, 0, -0.0484011, 0.998828, -0.000315905, -0.998828, -0.0484011, 0, 10.5237, 0.00796491 )
+transform = Transform( 1, 0, -3.82137e-15, 3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0, 10, 0 )
 current = true
-fov = 55.2
+fov = 55.0
 
 [node name="LevelRoot" type="Spatial" parent="."]
 
-[node name="TestLevel" parent="LevelRoot" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496287, 0 )
-
-[node name="TestLevel2" parent="LevelRoot" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.289, -0.496287, 0 )
+[node name="AutoGenLevel" parent="LevelRoot" instance=ExtResource( 3 )]
+level_length = 400.0

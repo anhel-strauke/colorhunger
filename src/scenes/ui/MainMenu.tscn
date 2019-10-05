@@ -187,5 +187,6 @@ size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "Exit"
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
