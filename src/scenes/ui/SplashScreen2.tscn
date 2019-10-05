@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/ui/SplashScreen.gd" type="Script" id=1]
+[ext_resource path="res://textures/splash_screen/siberian_game_jam_bear.png" type="Texture" id=2]
+[ext_resource path="res://textures/splash_screen/ludum_dare_45.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SibGameJamLogo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3.7, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LD45Logo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3.7, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="SplashScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+next_scene = "res://scenes/ui/MainMenu.tscn"
+
+[node name="splash_animation" type="AnimationPlayer" parent="."]
+autoplay = "show"
+anims/show = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="SibGameJamLogo" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.15
+anchor_top = 0.1
+anchor_right = 0.85
+anchor_bottom = 0.9
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="LD45Logo" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.75
+anchor_top = 0.89
+anchor_right = 0.97
+anchor_bottom = 0.96
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+[connection signal="animation_finished" from="splash_animation" to="." method="_on_splash_animation_finished"]
