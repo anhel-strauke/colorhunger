@@ -21,12 +21,11 @@ func _ready():
 func set_color(col: Color):
 	color = col
 	var mat = SpatialMaterial.new()
-	mat.emission = color
 	mat.albedo_color = color
-	mat.emission_energy = 3.05
+	mat.emission = color
+	mat.emission_energy = 3.0
 	mat.emission_enabled = true
-	$CSGSphere.material = mat
-	$OmniLight.light_color = color
+	$MeshInstance.material_override = mat
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

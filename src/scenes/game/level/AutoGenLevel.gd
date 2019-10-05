@@ -25,7 +25,7 @@ onready var random_colors = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if level_length > 0.0:
-		generate_level(level_length, 25)
+		generate_level(level_length, 30)
 
 
 func update_visibility(from_pos: float, screen_w: float):
@@ -35,6 +35,8 @@ func update_visibility(from_pos: float, screen_w: float):
 		if cur_pos + tile.tile_width >= from_pos or cur_pos <= from_pos + screen_w:
 			tile.visible = true
 		cur_pos += tile.tile_width
+	#for item in items:
+	#	if item.translation
 
 
 func _make_floor(length: float):

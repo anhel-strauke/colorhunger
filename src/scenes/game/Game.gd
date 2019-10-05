@@ -54,10 +54,10 @@ func _process(delta):
 	var level_delta = Vector3(level_pos_delta, 0, 0)
 	var hero_delta = Vector3(hero.h_accel * delta, 0, hero.v_accel * delta)
 	var full_hero_delta = level_delta + hero_delta
-	var collide_res: KinematicCollision = hero.try_move(full_hero_delta)
-	if collide_res:
-		var collide_with = (collide_res.collider as Spatial).get_parent()
-		collide_with.affect_hero(hero)
+	#var collide_res: KinematicCollision = hero.try_move(full_hero_delta)
+	#if collide_res:
+	#	var collide_with = (collide_res.collider as Spatial).get_parent()
+	#	collide_with.affect_hero(hero)
 	hero_rel_pos += hero_delta
 	hero_rel_pos = hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	level_pos -= delta * level_speed
