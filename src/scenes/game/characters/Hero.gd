@@ -4,6 +4,8 @@ extends Spatial
 # var a = 2
 # var b = "text"
 
+onready var color_tool = preload("res://scenes/game/ColorTool.gd").new()
+
 export var h_accel: float = 0.0
 export var v_accel: float = 0.0
 export var level_bound_x_min: float
@@ -11,7 +13,9 @@ export var level_bound_x_max: float
 export var level_bound_z_min: float
 export var level_bound_z_max: float
 
-export (Color) var color = Color(1.0, 1.0, 1.0)
+var color: Color = Color(1.0, 1.0, 1.0)
+
+var _colors = {}
 
 onready var _kinematic_body = $KinematicBody
 
@@ -41,13 +45,27 @@ func get_position() -> Vector3:
 	return pos
 
 
+func update_color():
+	if len(_colors) > 0:
+		var weighted_cols = []
+		for col in _colors:
+			weighted_cols.append([col, _colors[col]])
+		color = color_tool.mix_colors(weighted_cols)
+	else:
+		color = Color(1.0, 1.0, 1.0)
+	$Model/Body/MeshInstance.setColor(Vector3(color.r, color.g, color.b))
+
+
 func add_hero_color(col: Color):
-	color = col
-	$Model/Body/MeshInstance.setColor(Vector3(col.r, col.g, col.b))
+	if _colors.has(col):
+		_colors[col] = _colors[col] + 1
+	else:
+		_colors[col] = 1
+	update_color()
 
 
 func _ready():
-	pass # Replace with function body.
+	update_color()
 
 
 func _process(delta):

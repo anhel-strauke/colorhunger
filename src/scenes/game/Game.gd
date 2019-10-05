@@ -15,7 +15,6 @@ const hero_h_speed = 12.0
 const hero_v_speed = 8.0
 const level_speed = 6.0
 
-
 func _input(event):
 	if event.is_action_pressed("ui_up"):
 		hero.v_accel = -hero_v_speed
