@@ -23,7 +23,7 @@ func _ready():
 		l.light_energy = 4.44;
 		l.editor_only = true
 		
-	for v in range(0, 3):
+	for v in range(0, 0):
 		var l = lightClass.new()
 		# var l = OmniLight.new()
 		add_child(l)
