@@ -11,6 +11,15 @@ export var level_bound_x_max: float
 export var level_bound_z_min: float
 export var level_bound_z_max: float
 
+export (Color) var color = Color(1.0, 1.0, 1.0)
+
+onready var _kinematic_body = $KinematicBody
+
+
+func try_move(hero_delta: Vector3):
+	var res = _kinematic_body.move_and_collide(hero_delta, true, true, true)
+	return res
+
 
 func set_position(x: float, z: float) -> Vector3:
 	var new_pos = Vector3(x, 1.0, z)
@@ -30,6 +39,10 @@ func get_position() -> Vector3:
 	var pos = get_translation()
 	pos.y = 0.0
 	return pos
+
+
+func add_hero_color(col: Color):
+	color = col
 
 
 func _ready():
