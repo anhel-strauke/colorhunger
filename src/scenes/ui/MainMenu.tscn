@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://textures/ui/main_menu_bg.png" type="Texture" id=2]
 [ext_resource path="res://textures/ui/game_title.png" type="Texture" id=3]
 [ext_resource path="res://scenes/ui/TextureRectWithCenteredPivot.gd" type="Script" id=4]
-[ext_resource path="res://fonts/Play-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui_theme/custom_theme.tres" type="Theme" id=5]
+[ext_resource path="res://fonts/Play-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -112,7 +113,7 @@ tracks/3/keys = {
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -165,6 +166,7 @@ custom_constants/separation = 30
 margin_right = 640.0
 margin_bottom = 64.0
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "Start"
 
@@ -173,6 +175,7 @@ margin_top = 94.0
 margin_right = 640.0
 margin_bottom = 158.0
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "Credits"
 
@@ -181,6 +184,7 @@ margin_top = 188.0
 margin_right = 640.0
 margin_bottom = 252.0
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 3 )
 text = "Exit"
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]

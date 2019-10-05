@@ -5,11 +5,14 @@ extends Spatial
 # var b = "text"
 
 onready var hero = $Hero
+onready var level_root = $LevelRoot
 
 var hero_rel_pos: Vector3
+var level_pos: float = 0
 
 const hero_h_speed = 12.0
 const hero_v_speed = 8.0
+const level_speed = 6.0
 
 func _input(event):
 	if event.is_action_pressed("ui_up"):
@@ -39,3 +42,7 @@ func _process(delta):
 	hero_rel_pos.x += hero.h_accel * delta
 	hero_rel_pos.z += hero.v_accel * delta
 	hero_rel_pos = hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
+	level_pos -= delta * level_speed
+	level_root.translation = Vector3(level_pos, 0, 0)
+	
+	
