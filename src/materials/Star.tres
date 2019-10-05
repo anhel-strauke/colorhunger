@@ -13,6 +13,8 @@ uniform vec3 color2;
 uniform float size = 2.0;
 uniform float colorMix = 1.0;
 
+varying vec3 vertex_local;
+
 void vertex() {
 	float shift = texture(noize, vec2(sin(VERTEX.x + time), VERTEX.y)).x;
 	shift += texture(noize, VERTEX.zy).x;
@@ -21,10 +23,11 @@ void vertex() {
 	//VERTEX.x *= (1.0 - sin(time*VERTEX.x)/5.0);
 	//VERTEX.y *= (1.0 - sin(time*VERTEX.y)/5.0);
 	//VERTEX.z *= (1.0 - sin(time*VERTEX.z)/5.0);
+	vertex_local = VERTEX;
 }
 
 void fragment() {
-	ALBEDO = mix(color1, color2, VERTEX.x/size + colorMix);
+	ALBEDO = mix(color1, color2, vertex_local.x/size + colorMix);
 }
 "
 
