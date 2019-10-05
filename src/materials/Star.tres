@@ -7,6 +7,12 @@ render_mode blend_add;
 uniform sampler2D noize;
 uniform float time;
 
+uniform vec3 color1;
+uniform vec3 color2;
+
+uniform float size = 2.0;
+uniform float colorMix = 1.0;
+
 void vertex() {
 	float shift = texture(noize, vec2(sin(VERTEX.x + time), VERTEX.y)).x;
 	shift += texture(noize, VERTEX.zy).x;
@@ -15,6 +21,10 @@ void vertex() {
 	//VERTEX.x *= (1.0 - sin(time*VERTEX.x)/5.0);
 	//VERTEX.y *= (1.0 - sin(time*VERTEX.y)/5.0);
 	//VERTEX.z *= (1.0 - sin(time*VERTEX.z)/5.0);
+}
+
+void fragment() {
+	ALBEDO = mix(color1, color2, VERTEX.x/size + colorMix);
 }
 "
 
@@ -26,4 +36,8 @@ noise = SubResource( 2 )
 [resource]
 shader = SubResource( 1 )
 shader_param/time = null
+shader_param/color1 = null
+shader_param/color2 = null
+shader_param/size = 2.0
+shader_param/colorMix = 1.0
 shader_param/noize = SubResource( 3 )
