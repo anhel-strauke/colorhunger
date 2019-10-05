@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://textures/game/level/test_rocks.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://textures/game/level/test_rocks_color.jpg" type="Texture" id=2]
+[ext_resource path="res://textures/game/level/test_rocks_normal.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -3.5, 0, -5.28485e-07, 0, 3.5, 0, 5.28485e-07, 0, -3.5, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
