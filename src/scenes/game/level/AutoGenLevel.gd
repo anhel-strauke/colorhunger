@@ -16,6 +16,12 @@ onready var item_resources = [
 	preload("res://scenes/game/level/objects/RedSphere.tscn"),
 ]
 
+onready var random_colors = [
+	Color(1.0, 0.0, 0.0),
+	Color(0.0, 1.0, 0.0),
+	Color(0.0, 0.0, 1.0)
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if level_length > 0.0:
@@ -51,10 +57,23 @@ func _make_items(items_count: int):
 		item.queue_free()
 	for i in range(items_count):
 		var new_item: Spatial = item_resources[0].instance()
+		new_item.set_color(random_colors[randi() % len(random_colors)])
+		print("New item, color: ", new_item.color)
 		var z_pos = rand_range(-3.5, 3.5)
 		var x_pos = rand_range(0.0, real_level_length)
 		self.add_child(new_item)
 		new_item.translation = Vector3(x_pos, 1.0, z_pos)
+		new_item.connect("kill_me", self, "kill_item")
+		items.append(new_item)
+
+
+func kill_item(item):
+	print("Killing item ", item.name, " #", item.get_index())
+	var index = items.find(item)
+	if index >= 0:
+		items.remove(index)
+		self.remove_child(item)
+		item.queue_free()
 
 
 func generate_level(length: float, items: int):

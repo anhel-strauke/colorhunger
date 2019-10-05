@@ -15,6 +15,7 @@ const hero_h_speed = 12.0
 const hero_v_speed = 8.0
 const level_speed = 6.0
 
+
 func _input(event):
 	if event.is_action_pressed("ui_up"):
 		hero.v_accel = -hero_v_speed
@@ -48,10 +49,16 @@ func _ready():
 	print("Game size: ", half_w * 2, " x ", half_h * 2)
 	
 
-
 func _process(delta):
-	hero_rel_pos.x += hero.h_accel * delta
-	hero_rel_pos.z += hero.v_accel * delta
+	var level_pos_delta = delta * level_speed
+	var level_delta = Vector3(level_pos_delta, 0, 0)
+	var hero_delta = Vector3(hero.h_accel * delta, 0, hero.v_accel * delta)
+	var full_hero_delta = level_delta + hero_delta
+	var collide_res: KinematicCollision = hero.try_move(full_hero_delta)
+	if collide_res:
+		var collide_with = (collide_res.collider as Spatial).get_parent()
+		collide_with.affect_hero(hero)
+	hero_rel_pos += hero_delta
 	hero_rel_pos = hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	level_pos -= delta * level_speed
 	level_root.translation = Vector3(level_pos, 0, 0)
