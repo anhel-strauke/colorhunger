@@ -43,6 +43,7 @@ func get_position() -> Vector3:
 
 func add_hero_color(col: Color):
 	color = col
+	$Model/Body/MeshInstance.setColor(Vector3(col.r, col.g, col.b))
 
 
 func _ready():

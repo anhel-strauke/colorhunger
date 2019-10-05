@@ -15,16 +15,27 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ColorHunger"
-run/main_scene="res://scenes/gfx_test/GfxTest.tscn"
+config/name="Out Of Insight"
+run/main_scene="res://scenes/ui/SplashScreen.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/stretch/aspect="keep"
+
+[layer_names]
+
+3d_physics/layer_1="Items"
+3d_physics/layer_2="Enemies"
+3d_physics/layer_3="Walls"
+3d_physics/layer_4="Hero"
 
 [rendering]
 
