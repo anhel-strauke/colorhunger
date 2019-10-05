@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/level/AutoGenLevel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/level/objects/RedSphere.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
@@ -23,3 +24,6 @@ fov = 55.0
 
 [node name="AutoGenLevel" parent="LevelRoot" instance=ExtResource( 3 )]
 level_length = 400.0
+
+[node name="RedSphere" parent="LevelRoot" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.4423, 0.782736, 2.24426 )
