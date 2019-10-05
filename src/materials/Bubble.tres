@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode blend_add;
+
+uniform sampler2D noize;
+uniform float time;
+
+void vertex() {
+	float shift = texture(noize, VERTEX.xy).x;
+	shift += texture(noize, VERTEX.zy).x;
+	VERTEX.xyz *= 1.0 + shift/3.0;
+	VERTEX.x *= (2.0 - sin(time)*sin(VERTEX.z));
+	VERTEX.y *= (2.0 - sin(time+0.5)*sin(VERTEX.y));
+	VERTEX.z *= (2.0 - sin(time+0.7)*sin(VERTEX.z));
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/time = null
+shader_param/noize = SubResource( 3 )
