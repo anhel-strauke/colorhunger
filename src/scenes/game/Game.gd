@@ -37,6 +37,7 @@ func _input(event):
 
 
 func _ready():
+	randomize()
 	hero_rel_pos = Vector3(-6, 0, 0)
 	hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	var half_h = abs(tan($GameCamera.fov) / $GameCamera.translation.y)
