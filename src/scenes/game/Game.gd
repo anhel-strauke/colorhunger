@@ -42,7 +42,6 @@ func _input(event):
 
 
 func _ready():
-	randomize()
 	hero_rel_pos = Vector3(-6, 0, 0)
 	hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	var half_h = abs(tan($GameCamera.fov) / $GameCamera.translation.y)
@@ -54,6 +53,7 @@ func _ready():
 	$Hero.level_bound_x_max = half_w - 1
 	$Hero.level_bound_z_min = -(half_h - 1)
 	$Hero.level_bound_z_max = half_h - 1
+	level_pos = -6.0
 	print("Game size: ", half_w * 2, " x ", half_h * 2)
 	
 

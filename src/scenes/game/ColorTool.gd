@@ -1,5 +1,8 @@
 extends Node
 
+# Based on solution from
+# https://web.archive.org/web/20130525061042/www.insanit.net/tag/rgb-to-ryb/
+
 func _rgb2ryb(rgb):
 	var r = rgb[0]
 	var g = rgb[1]
