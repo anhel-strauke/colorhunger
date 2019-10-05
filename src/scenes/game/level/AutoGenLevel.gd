@@ -60,10 +60,10 @@ func _make_items(items_count: int):
 		item.queue_free()
 	for i in range(items_count):
 		var new_item: Spatial = item_resources[0].instance()
-		new_item.set_color(random_colors[randi() % len(random_colors)])
 		var z_pos = rand_range(-3.5, 3.5)
 		var x_pos = rand_range(0.0, real_level_length)
 		self.add_child(new_item)
+		new_item.set_color(random_colors[randi() % len(random_colors)])
 		new_item.translation = Vector3(x_pos, 4.0, z_pos)
 		new_item.connect("kill_me", self, "kill_item")
 		items.append(new_item)

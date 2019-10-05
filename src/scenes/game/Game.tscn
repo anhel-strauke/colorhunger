@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/level/AutoGenLevel.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_energy = 0.0
+ambient_light_energy = 0.0
+ambient_light_sky_contribution = 0.0
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
@@ -15,7 +21,7 @@ level_bound_z_min = -4.0
 level_bound_z_max = 4.0
 
 [node name="GameCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, -3.82137e-15, 3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0, 10, 0 )
+transform = Transform( 1, 0, -3.82137e-15, 3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0, 12, 0 )
 current = true
 fov = 55.0
 
@@ -31,4 +37,7 @@ margin_right = 40.0
 [node name="HeroColor" type="ColorRect" parent="UI"]
 anchor_bottom = 1.0
 margin_right = 40.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 [connection signal="color_updated" from="Hero" to="." method="_on_Hero_color_updated"]

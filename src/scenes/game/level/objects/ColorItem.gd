@@ -25,6 +25,8 @@ func _ready():
 
 func set_color(col: Color):
 	color = col
+	$Model/MeshInstance.setColor(Vector3(color.r, color.g, color.b), 1.0);
+	return
 	var mat = SpatialMaterial.new()
 	mat.albedo_color = color
 	mat.emission = color

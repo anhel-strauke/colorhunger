@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/level/objects/ColorItem.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gfx/Bubble.tscn" type="PackedScene" id=2]
 
-[sub_resource type="SphereShape" id=2]
+[sub_resource type="SphereShape" id=1]
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="SphereMesh" id=2]
 radius = 0.5
 height = 1.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "destroy"
 length = 0.3
 tracks/0/type = "value"
@@ -46,12 +47,17 @@ input_ray_pickable = false
 collision_mask = 8
 
 [node name="RedCollisionShape" type="CollisionShape" parent="RedStaticBody"]
-shape = SubResource( 2 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 3 )
+visible = false
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
-anims/destroy = SubResource( 4 )
+anims/destroy = SubResource( 3 )
+
+[node name="Model" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )

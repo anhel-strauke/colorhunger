@@ -9,7 +9,7 @@ script = ExtResource( 1 )
 tile_width = 18.0
 
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0138099, 0, -3.69297 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014, 0, -4 )
 
 [node name="Spatial2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )

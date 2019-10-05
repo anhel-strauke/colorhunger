@@ -18,7 +18,8 @@ var prevColor = color;
 var colorTransition = 1.0;
 
 func _ready():
-	material = get_surface_material(0);
+	material = get_surface_material(0).duplicate();
+	set_surface_material(0, material);
 	
 	light = get_node("../OmniLight");
 	lightDist = light.translation.length();
@@ -27,17 +28,18 @@ func _ready():
 	if light2:
 		lightDist2 = light2.translation.length();
 	
-	setColor(Vector3(1.0, 0.0, 0.0));
+	setColor(Vector3(1.0, 1.0, 1.0));
 	
 
 var time = 0.0;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
-func setColor(newColor: Vector3):
+func setColor(newColor: Vector3, transition=0.0):
+	# newColor = Vector3(0.0, 1.0, 0.0);
 	prevColor = color;
 	color = newColor;
-	colorTransition = 0.0;
+	colorTransition = transition;
 	material.set_shader_param("color1", prevColor);
 	material.set_shader_param("color2", color);
 

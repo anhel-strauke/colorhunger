@@ -10,10 +10,13 @@ height = 1.0
 [node name="Spatial" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80656, 1.22819, 2.9055 )
-light_cull_mask = 4294443008
+transform = Transform( 0.999903, 0.0139266, 0, -0.0139266, 0.999903, 0, 0, 0, 1, -1.36803, 0.860028, 2.56698 )
+light_cull_mask = 4293918721
+omni_range = 4.3
+omni_attenuation = 0.732043
