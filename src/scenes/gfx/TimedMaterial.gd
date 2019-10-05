@@ -46,15 +46,15 @@ func moveLight():
 	if light2:
 		light2.translation = Vector3(lightDist2 * sin(time*3.0), 0.0, lightDist2 * cos(time*2.0));
 
-var colorSet = false;
+# var colorSet = false;
 func _process(delta):
 	time += delta;
 	# var material = mesh.surface_get_material(0);
 	material.set_shader_param("time", time);
 	colorTransition += delta*1.0;
-	if time > 3 and not colorSet:
-		setColor(Vector3(0.0, 1.0, 0.0));
-		colorSet = true;
+	#if time > 3 and not colorSet:
+	#	setColor(Vector3(0.0, 1.0, 0.0));
+	#	colorSet = true;
 	if colorTransition > 1.0:
 		colorTransition = 1.0;
 	material.set_shader_param("colorMix", colorTransition);
