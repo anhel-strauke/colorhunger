@@ -8,12 +8,13 @@ uniform sampler2D noize;
 uniform float time;
 
 void vertex() {
-	float shift = texture(noize, VERTEX.xy).x;
+	float shift = texture(noize, vec2(sin(VERTEX.x + time), VERTEX.y)).x;
 	shift += texture(noize, VERTEX.zy).x;
+	//shift += (sin(time + VERTEX.x) + sin(time + VERTEX.y) + sin(time + VERTEX.z))*0.5;
 	VERTEX.xyz *= shift;
-	VERTEX.x *= (1.0 - sin(time*VERTEX.x)/5.0);
-	VERTEX.y *= (1.0 - sin(time*VERTEX.y)/5.0);
-	VERTEX.z *= (1.0 - sin(time*VERTEX.z)/5.0);
+	//VERTEX.x *= (1.0 - sin(time*VERTEX.x)/5.0);
+	//VERTEX.y *= (1.0 - sin(time*VERTEX.y)/5.0);
+	//VERTEX.z *= (1.0 - sin(time*VERTEX.z)/5.0);
 }
 "
 

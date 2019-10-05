@@ -11,7 +11,7 @@ void vertex() {
 	float shift = texture(noize, VERTEX.xy).x;
 	shift += texture(noize, VERTEX.zy).x;
 	VERTEX.xyz *= 1.0 + shift/3.0;
-	VERTEX.x *= (2.0 - sin(time)*sin(VERTEX.z));
+	VERTEX.x *= (2.0 - sin(time)*sin(VERTEX.x));
 	VERTEX.y *= (2.0 - sin(time+0.5)*sin(VERTEX.y));
 	VERTEX.z *= (2.0 - sin(time+0.7)*sin(VERTEX.z));
 }
