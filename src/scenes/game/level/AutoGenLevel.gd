@@ -23,13 +23,16 @@ export var level_length: float = 0.0
 #]
 
 onready var tile_resources = [
-	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeat.tscn"),
-	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeatSpider.tscn"),
-	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones1.tscn"),
-	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones2.tscn"),
-	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones3.tscn"),
+#	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeat.tscn"),
+#	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeatSpider.tscn"),
+#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones1.tscn"),
+#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones2.tscn"),
+#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones3.tscn"),
 	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones4.tscn"),
 	preload("res://scenes/game/level/tiles/floor_tiles/FloorBlodyRoots.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2Arm.tscn"),
 ]
 
 onready var item_resources = [

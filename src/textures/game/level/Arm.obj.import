@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Arm.obj-d844a05acb2a641ce2e9c9cdac0d5a2a.mesh"
+
+[deps]
+
+files=[ "res://.import/Arm.obj-d844a05acb2a641ce2e9c9cdac0d5a2a.mesh" ]
+
+source_file="res://textures/game/level/Arm.obj"
+dest_files=[ "res://.import/Arm.obj-d844a05acb2a641ce2e9c9cdac0d5a2a.mesh", "res://.import/Arm.obj-d844a05acb2a641ce2e9c9cdac0d5a2a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

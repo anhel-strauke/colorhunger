@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/level/tiles/tile.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gfx/tiles/Rocks2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/gfx/Arm.tscn" type="PackedScene" id=3]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+tile_width = 18.0
+
+[node name="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -1.15032, 0, -6.03351 )
+
+[node name="Spatial2" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.0856401, 0, -0.996326, 0, 1, 0, 0.996326, 0, -0.0856401, 0.803824, 0.643392, -2.67439 )

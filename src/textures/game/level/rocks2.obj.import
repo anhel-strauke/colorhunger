@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/rocks2.obj-74a6e0a135ebed9e7e2fb020881b6f01.mesh"
+
+[deps]
+
+files=[ "res://.import/rocks2.obj-74a6e0a135ebed9e7e2fb020881b6f01.mesh" ]
+
+source_file="res://textures/game/level/rocks2.obj"
+dest_files=[ "res://.import/rocks2.obj-74a6e0a135ebed9e7e2fb020881b6f01.mesh", "res://.import/rocks2.obj-74a6e0a135ebed9e7e2fb020881b6f01.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
