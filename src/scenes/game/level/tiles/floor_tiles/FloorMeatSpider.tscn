@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/game/level/tiles/tile.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat4.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat5.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/gfx/tiles/BackMeat6.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/gfx/tiles/Spider.tscn" type="PackedScene" id=8]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+tile_width = 72.0
+
+[node name="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 0, 3 )
+
+[node name="Spatial15" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3 )
+
+[node name="Spatial3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -3 )
+
+[node name="Spatial16" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -3 )
+
+[node name="Spatial4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 3 )
+
+[node name="Spatial17" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3 )
+
+[node name="Spatial2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 0, -3 )
+
+[node name="Spatial18" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3 )
+
+[node name="Spatial5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, -3 )
+
+[node name="Spatial20" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -3 )
+
+[node name="Spatial6" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 3 )
+
+[node name="Spatial22" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 3 )
+
+[node name="Spatial7" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -3 )
+
+[node name="Spatial13" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -3 )
+
+[node name="Spatial8" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3 )
+
+[node name="Spatial14" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 3 )
+
+[node name="Spatial9" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -3 )
+
+[node name="Spatial21" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, -3 )
+
+[node name="Spatial10" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 3 )
+
+[node name="Spatial23" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 3 )
+
+[node name="Spatial11" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3 )
+
+[node name="Spatial24" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -3 )
+
+[node name="Spatial12" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3 )
+
+[node name="Spatial19" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 3 )
+
+[node name="Spatial25" parent="." instance=ExtResource( 8 )]
+transform = Transform( 2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0.1, 0 )
