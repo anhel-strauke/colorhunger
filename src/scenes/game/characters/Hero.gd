@@ -5,6 +5,7 @@ extends Spatial
 # var b = "text"
 
 signal color_updated(col)
+signal died()
 
 onready var color_tool = preload("res://scenes/game/ColorTool.gd").new()
 
@@ -14,6 +15,7 @@ export var level_bound_x_min: float
 export var level_bound_x_max: float
 export var level_bound_z_min: float
 export var level_bound_z_max: float
+export var white_boost: int = 6
 
 var color: Color = Color(1.0, 1.0, 1.0)
 
@@ -51,8 +53,8 @@ func update_color():
 	var weighted_cols = []
 	for col in _colors:
 		weighted_cols.append([col, 1])
-	if len(_colors) < 6:
-		for i in range(6 - len(_colors)):
+	if len(_colors) < white_boost:
+		for i in range(white_boost - len(_colors)):
 			weighted_cols.append([Color(1.0, 1.0, 1.0), 1])
 	color = color_tool.mix_colors(weighted_cols)
 	$Model/Body/MeshInstance.setColor(Vector3(color.r, color.g, color.b))
@@ -63,6 +65,10 @@ func add_hero_color(col: Color):
 	_colors.append(col)
 	update_color()
 	print("Mix: ", color)
+
+
+func die():
+	emit_signal("died")
 
 
 func clear_color():

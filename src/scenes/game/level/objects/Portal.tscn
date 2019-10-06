@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/game/level/objects/Portal.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=6]
+emission_enabled = true
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [sub_resource type="CylinderMesh" id=1]
+material = SubResource( 6 )
 top_radius = 5.0
 bottom_radius = 5.0
 height = 0.5
-
-[sub_resource type="SpatialMaterial" id=2]
-emission_enabled = true
-emission = Color( 0.123622, 0.6596, 0.446249, 1 )
-emission_energy = 1.29269
-emission_operator = 0
-emission_on_uv2 = false
 
 [sub_resource type="SpatialMaterial" id=3]
 emission_enabled = true
@@ -35,7 +38,7 @@ tracks/0/path = NodePath("Model/MeshInstance:material/0:emission_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
@@ -44,6 +47,7 @@ tracks/0/keys = {
 }
 
 [node name="Portal" type="Spatial"]
+script = ExtResource( 1 )
 
 [node name="Model" type="Spatial" parent="."]
 transform = Transform( 0.0340533, 0, 0.99942, 0, 1, 0, -0.99942, 0, 0.0340533, 0, 0, 0 )
@@ -51,7 +55,7 @@ transform = Transform( 0.0340533, 0, 0.99942, 0, 1, 0, -0.99942, 0, 0.0340533, 0
 [node name="MeshInstance" type="MeshInstance" parent="Model"]
 transform = Transform( 1, 0, 0, 0, 0.277652, 0.960682, 0, -0.960682, 0.277652, -0.0275886, 0, 0.000261843 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+material/0 = null
 
 [node name="Particles" type="CPUParticles" parent="Model"]
 transform = Transform( 0.999778, 0.0199195, 0.00670489, 0.0199928, -0.802938, -0.595728, -0.00648299, 0.59573, -0.803157, -0.0324828, -0.158188, -2.10148 )
@@ -62,6 +66,7 @@ emission_points = PoolVector3Array( 2.44156, 0.809376, -0.0260476, -5.96708, -0.
 spread = 90.0
 initial_velocity = 2.0
 initial_velocity_random = 1.0
+angular_velocity = 0.1
 color = Color( 0.0823529, 0.0941176, 0.701961, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

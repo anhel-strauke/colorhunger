@@ -1,12 +1,17 @@
 extends Spatial
 
 export var tile_width: float
+export var tile_height: float = 12
+export var accept_decales: bool = false
 
 # Called when the node enters the scene tree for the first time.
 
 var lights = [];
 
 var lightClass = preload("res://scenes/game/level/objects/FloatingLight.gd");
+
+func affect_hero(hero):
+	hero.die()
 
 func _ready():
 	for v in range(0, 0):
@@ -19,7 +24,7 @@ func _ready():
 		l.rotate_y(rand_range(0, 3.14));
 		l.spot_attenuation = 1.36;
 		l.spot_angle = 41.0;
-		l.spot_range = 12.0;
+		l.spot_range = 12.0;$UI/Message/LooseMessage.show()
 		l.light_energy = 4.44;
 		l.editor_only = true
 		
@@ -42,13 +47,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (global_transform.origin - get_node("/root/Game/GameCamera").global_transform.origin).length() < 20.0:
-		for l in lights:
-			l.stage = l.stage + delta;
-			l.translation.y = l.orig_y + sin(l.stage)*2;
-			#continue
-			l.editor_only = false
-	else:
-		for l in lights:
-			pass
-			l.editor_only = true
+	if get_node("/root/Game/GameCamera"):
+		if (global_transform.origin - get_node("/root/Game/GameCamera").global_transform.origin).length() < 20.0:
+			for l in lights:
+				l.stage = l.stage + delta;
+				l.translation.y = l.orig_y + sin(l.stage)*2;
+				#continue
+				l.editor_only = false
+		else:
+			for l in lights:
+				pass
+				l.editor_only = true

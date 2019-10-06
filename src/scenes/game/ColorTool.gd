@@ -114,3 +114,10 @@ func mix_colors(weighted_colors: Array) -> Color:
 	var mix_ryb = _mix_ryb_colors(w_ryb)
 	var mix_rgb = _ryb2rgb(mix_ryb)
 	return Color(mix_rgb[0], mix_rgb[1], mix_rgb[2])
+
+
+func mix_colors_dict(weighted_colors) -> Color:
+	var weighted_colors_arr = []
+	for color in weighted_colors:
+		weighted_colors_arr.append([color, weighted_colors[color]])
+	return mix_colors(weighted_colors_arr)
