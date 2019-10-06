@@ -15,11 +15,21 @@ var win_condition_color: Color
 
 export var level_length: float = 0.0
 
+#onready var tile_resources = [
+#	#preload("res://scenes/game/level/tiles/test_tile_1.tscn"),
+#	preload("res://scenes/game/level/tiles/test_tile_2.tscn"),
+#	#preload("res://scenes/game/level/tiles/test_tile_3.tscn"),
+#	preload("res://scenes/game/level/tiles/test_tile_4.tscn"),
+#]
+
 onready var tile_resources = [
-	#preload("res://scenes/game/level/tiles/test_tile_1.tscn"),
-	preload("res://scenes/game/level/tiles/test_tile_2.tscn"),
-	#preload("res://scenes/game/level/tiles/test_tile_3.tscn"),
-	preload("res://scenes/game/level/tiles/test_tile_4.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeat.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeatSpider.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones1.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones2.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones3.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones4.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorBlodyRoots.tscn"),
 ]
 
 onready var item_resources = [
