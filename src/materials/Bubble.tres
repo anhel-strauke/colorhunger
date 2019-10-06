@@ -11,15 +11,17 @@ uniform vec3 color2;
 uniform float size = 2.0;
 uniform float colorMix = 1.0;
 
+uniform float coeff = 0.5;
+
 varying vec3 vertex_local;
 
 void vertex() {
 	float shift = texture(noize, VERTEX.xy).x;
 	shift += texture(noize, VERTEX.zy).x;
-	VERTEX.xyz *= 1.0 + shift/3.0;
-	VERTEX.x *= (2.0 - sin(time)*sin(VERTEX.x));
-	VERTEX.y *= (2.0 - sin(time+0.5)*sin(VERTEX.y));
-	VERTEX.z *= (2.0 - sin(time+0.7)*sin(VERTEX.z));
+	VERTEX.xyz *= 1.0 + shift/10.0;
+	VERTEX.x *= (2.0 - sin(time)*sin(VERTEX.x)*coeff);
+	VERTEX.y *= (2.0 - sin(time+0.5)*sin(VERTEX.y)*coeff);
+	VERTEX.z *= (2.0 - sin(time+0.7)*sin(VERTEX.z)*coeff);
 	
 	vertex_local = VERTEX;
 }
@@ -41,4 +43,5 @@ shader_param/color1 = null
 shader_param/color2 = null
 shader_param/size = 2.0
 shader_param/colorMix = 1.0
+shader_param/coeff = 0.5
 shader_param/noize = SubResource( 3 )

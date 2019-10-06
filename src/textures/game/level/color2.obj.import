@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/color2.obj-df60202a9cfb565d162e30db95a402d7.mesh"
+
+[deps]
+
+files=[ "res://.import/color2.obj-df60202a9cfb565d162e30db95a402d7.mesh" ]
+
+source_file="res://textures/game/level/color2.obj"
+dest_files=[ "res://.import/color2.obj-df60202a9cfb565d162e30db95a402d7.mesh", "res://.import/color2.obj-df60202a9cfb565d162e30db95a402d7.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
