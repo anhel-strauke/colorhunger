@@ -20,7 +20,7 @@ func _ready():
 	get_tree().get_root().connect("size_changed", self, "_update_sizes")
 	_update_sizes()
 	if OS.get_name() == "HTML5":
-		$Buttons/CreditsButton.hide()
+		$Buttons/ExitButton.hide()
 	$AnimationPlayer.play("idle")
 	$StartupAnimationPlayer.play("startup")
 
@@ -39,3 +39,7 @@ func _on_CreditsButton_pressed():
 
 func _on_StartButton_pressed():
 	get_tree().change_scene("res://scenes/ui/greeter.tscn")
+
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer.play()

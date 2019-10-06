@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://fonts/play_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://fonts/giant_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://textures/ui/keys.png" type="Texture" id=8]
+[ext_resource path="res://sound/LVLAnch.ogg" type="AudioStream" id=9]
+[ext_resource path="res://sound/GetToColor.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sound/Die3.ogg" type="AudioStream" id=11]
+[ext_resource path="res://sound/Die4ogg.ogg" type="AudioStream" id=12]
+[ext_resource path="res://sound/prokhod_portala.ogg" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "start"
@@ -261,7 +266,24 @@ anims/show = SubResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
+
+[node name="item_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="loose_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="death_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="win_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 [connection signal="color_updated" from="Hero" to="." method="_on_Hero_color_updated"]
 [connection signal="died" from="Hero" to="." method="_on_Hero_died"]
 [connection signal="win_condition_color_updated" from="LevelRoot/AutoGenLevel" to="." method="_on_AutoGenLevel_win_condition_color_updated"]
 [connection signal="animation_finished" from="UI/LevelBoxAnimator" to="." method="_on_LevelBoxAnimator_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

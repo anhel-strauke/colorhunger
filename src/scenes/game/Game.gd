@@ -98,6 +98,10 @@ func _ready():
 		level_anim.play("show")
 	victory_overlay.color = Color(0, 0, 0)
 	anim_player.play("start")
+	$item_sound.stream.set_loop(false)
+	$loose_sound.stream.set_loop(false)
+	$death_sound.stream.set_loop(false)
+	$win_sound.stream.set_loop(false)
 	
 
 func _process(delta):
@@ -109,6 +113,8 @@ func _process(delta):
 	if collide_res:
 		var collide_with = (collide_res.collider as Spatial).get_parent()
 		collide_with.affect_hero(hero, collide_res.normal)
+		if (collide_res.collider as Spatial).name == "RedStaticBody":
+			$item_sound.play()
 	hero_rel_pos += hero_delta
 	var new_hero_rel_pos = hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	if hero_delta.x > 0 and hero_rel_pos.x == new_hero_rel_pos.x:
@@ -129,10 +135,12 @@ func _process(delta):
 				victory_overlay.color = $LevelRoot/AutoGenLevel.win_condition_color
 				anim_player.play("victory")
 				show_message(win_message)
+				$win_sound.play()
 			else:
 				victory_overlay.color = Color(0, 0, 0)
 				anim_player.play("victory")
 				show_message(loose_message)
+				$loose_sound.play()
 
 
 func distance(col1, col2):
@@ -163,6 +171,7 @@ func _on_AutoGenLevel_win_condition_color_updated(color):
 
 
 func _on_Hero_died():
+	$death_sound.play()
 	show_message(death_message)
 
 
@@ -195,3 +204,7 @@ func _on_LevelBoxAnimator_animation_finished(anim_name):
 	if $LevelRoot/AutoGenLevel.level_index == 1:
 		if anim_name == "show":
 			$UI/KeysHintAnimator.play("show")
+
+
+func _on_AudioStreamPlayer_finished():
+	$AudioStreamPlayer.play()

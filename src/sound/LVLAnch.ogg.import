@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LVLAnch.ogg-0fb0a80c5ad00e5de52faf596295347b.oggstr"
+
+[deps]
+
+source_file="res://sound/LVLAnch.ogg"
+dest_files=[ "res://.import/LVLAnch.ogg-0fb0a80c5ad00e5de52faf596295347b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

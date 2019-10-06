@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://textures/ui/main_menu_bg.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/ui/TextureRectWithCenteredPivot.gd" type="Script" id=4]
 [ext_resource path="res://ui_theme/custom_theme.tres" type="Theme" id=5]
 [ext_resource path="res://fonts/VTKS ANIMAL 2.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://sound/MainAnch.ogg" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -201,6 +202,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

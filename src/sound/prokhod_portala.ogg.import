@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/prokhod_portala.ogg-eaef20792996483b96a60883603a10fa.oggstr"
+
+[deps]
+
+source_file="res://sound/prokhod_portala.ogg"
+dest_files=[ "res://.import/prokhod_portala.ogg-eaef20792996483b96a60883603a10fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
