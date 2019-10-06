@@ -14,6 +14,7 @@ script = ExtResource( 3 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 0.999903, 0.0139266, 0, -0.0139266, 0.999903, 0, 0, 0, 1, -1.16321, 1.11912, 0.988419 )
+light_energy = 2.9
 light_cull_mask = 4293918721
-omni_range = 4.3
+omni_range = 2.1
 omni_attenuation = 0.732043
