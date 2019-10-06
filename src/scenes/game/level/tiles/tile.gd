@@ -10,7 +10,7 @@ var lights = [];
 
 var lightClass = preload("res://scenes/game/level/objects/FloatingLight.gd");
 
-func affect_hero(hero):
+func affect_hero(hero, normal):
 	hero.die()
 
 func _ready():

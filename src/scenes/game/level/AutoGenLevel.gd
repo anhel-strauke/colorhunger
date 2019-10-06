@@ -23,16 +23,13 @@ export var level_length: float = 0.0
 #]
 
 onready var tile_resources = [
-#	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeat.tscn"),
-#	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeatSpider.tscn"),
-#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones1.tscn"),
-#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones2.tscn"),
-#	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones3.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeat.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorMeatSpider.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones1.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones2.tscn"),
+	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones3.tscn"),
 	preload("res://scenes/game/level/tiles/floor_tiles/FloorStones4.tscn"),
 	preload("res://scenes/game/level/tiles/floor_tiles/FloorBlodyRoots.tscn"),
-	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
-	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
-	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2Arm.tscn"),
 ]
 
 onready var item_resources = [
@@ -40,13 +37,22 @@ onready var item_resources = [
 ]
 
 onready var wall_resources = [
-	preload("res://scenes/game/level/tiles/Wall_1.tscn"),
-	preload("res://scenes/game/level/tiles/Wall_1.tscn"),
+preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2Arm.tscn"),
+	#preload("res://scenes/game/level/tiles/Wall_1.tscn"),
+	#preload("res://scenes/game/level/tiles/Wall_1.tscn"),
 ]
 
 onready var decale_resources = [
-	preload("res://scenes/game/level/tiles/decale_test_1.tscn"),
-	preload("res://scenes/game/level/tiles/decale_test_2.tscn")
+	#preload("res://scenes/game/level/tiles/decale_test_1.tscn"),
+	#preload("res://scenes/game/level/tiles/decale_test_2.tscn")
+	preload("res://scenes/gfx/tiles/Roots.tscn"),
+	preload("res://scenes/gfx/tiles/Blood.tscn"),
+	preload("res://scenes/gfx/tiles/Flower.tscn"),
+	preload("res://scenes/gfx/tiles/FlowerBlood.tscn"),
+	preload("res://scenes/gfx/tiles/Mushrooms.tscn"),
+	preload("res://scenes/gfx/tiles/Spider.tscn"),
 ]
 
 
