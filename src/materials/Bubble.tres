@@ -2,7 +2,7 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
-render_mode blend_add;
+render_mode blend_add, cull_disabled, depth_test_disable;
 
 uniform sampler2D noize;
 uniform float time;
@@ -28,6 +28,10 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = mix(color1, color2, vertex_local.x/size + colorMix);
+}
+
+void light() {
+	DIFFUSE_LIGHT = abs(dot(NORMAL, LIGHT))/8.0 * ALBEDO;
 }
 "
 
