@@ -24,15 +24,28 @@ onready var win_con_color = $UI/VBoxContainer/WinConColor
 onready var win_con_label = $UI/VBoxContainer/WinConLabel
 onready var camera = $GameCamera
 
+onready var win_message = $UI/Message/WinMessage
+onready var loose_message = $UI/Message/LooseMessage
+onready var death_message = $UI/Message/DeathMessage
+
+onready var victory_overlay = $UI/VictoryOverlay
+onready var anim_player = $UI/OverlayAnimator
+onready var level_label = $UI/LevelBox/LevelLabel
+onready var level_anim = $UI/LevelBoxAnimator
+
+var current_message = null
+
 var base_camera_pos: Vector3
 
 func _input(event):
 	if wait_for_any_key:
 		if event.is_pressed():
 			wait_for_any_key = false
-			$UI/Message/WinMessage.hide()
-			$UI/Message/LooseMessage.hide()
-			$"/root/singleton".level = $LevelRoot/AutoGenLevel.level_index + 1
+			if current_message == win_message:
+				$"/root/singleton".level = $LevelRoot/AutoGenLevel.level_index + 1
+			if current_message:
+				current_message.hide()
+				current_message = null
 			$"/root/singleton".transit_to_scene("res://scenes/game/Game.tscn")
 	if not controls_enabled:
 		return
@@ -55,7 +68,9 @@ func _input(event):
 
 
 func _ready():
-	hero_rel_pos = Vector3(-6, 0, 0)
+	get_tree().get_root().connect("size_changed", self, "_update_sizes")
+	_update_sizes()
+	hero_rel_pos = Vector3(-5, 0, 0)
 	hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	var half_h = abs(tan($GameCamera.fov) / $GameCamera.translation.y)
 	var vp_size = get_tree().get_root().size
@@ -79,6 +94,10 @@ func _ready():
 		$Hero.white_boost = 6
 	if level:
 		$LevelRoot/AutoGenLevel.run_level(level)
+		level_label.text = "LEVEL " + str(level)
+		level_anim.play("show")
+	victory_overlay.color = Color(0, 0, 0)
+	anim_player.play("start")
 	
 
 func _process(delta):
@@ -103,15 +122,17 @@ func _process(delta):
 	level_root.translation = Vector3(level_pos, 0, 0)
 	$LevelRoot/AutoGenLevel.update_visibility(-level_pos, screen_width)
 	
-	if level_pos - hero_rel_pos.x < -($LevelRoot/AutoGenLevel.real_level_length - 6):
-		level_speed = 0.0
-		controls_enabled = false
-		var complete = calc_distance_to_wincon(hero.color, $LevelRoot/AutoGenLevel.win_condition_color)
-		if complete >= 0.85:
-			$UI/Message/WinMessage.show()
-		else:
-			$UI/Message/LooseMessage.show()
-		wait_for_any_key = true
+	if not current_message:
+		if level_pos - hero_rel_pos.x < -($LevelRoot/AutoGenLevel.real_level_length - 6):
+			var complete = calc_distance_to_wincon(hero.color, $LevelRoot/AutoGenLevel.win_condition_color)
+			if complete >= 0.85:
+				victory_overlay.color = $LevelRoot/AutoGenLevel.win_condition_color
+				anim_player.play("victory")
+				show_message(win_message)
+			else:
+				victory_overlay.color = Color(0, 0, 0)
+				anim_player.play("victory")
+				show_message(loose_message)
 
 
 func distance(col1, col2):
@@ -142,7 +163,35 @@ func _on_AutoGenLevel_win_condition_color_updated(color):
 
 
 func _on_Hero_died():
+	show_message(death_message)
+
+
+func show_message(msg):
+	msg.show()
+	current_message = msg
 	level_speed = 0.0
 	controls_enabled = false
-	$UI/Message/LooseMessage.show()
 	wait_for_any_key = true
+	$Hero.hide()
+
+func _update_sizes():
+	var viewport_height = get_tree().get_root().size.y
+	var sep = 30 * viewport_height / 720
+	var font = load("res://fonts/play_font.tres")
+	font.size = 40 * viewport_height / 720
+	win_message.get_node("Label").add_font_override("font", font)
+	loose_message.get_node("Label").add_font_override("font", font)
+	death_message.get_node("Label").add_font_override("font", font)
+	font = load("res://fonts/ui_small_font.tres")
+	font.size = 28 * viewport_height / 720
+	win_con_label.add_font_override("font", font)
+	font = load("res://fonts/giant_font.tres")
+	font.size = 88 * viewport_height / 720
+	level_label.add_font_override("font", font)
+
+
+
+func _on_LevelBoxAnimator_animation_finished(anim_name):
+	if $LevelRoot/AutoGenLevel.level_index == 1:
+		if anim_name == "show":
+			$UI/KeysHintAnimator.play("show")

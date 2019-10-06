@@ -12,8 +12,8 @@ onready var hide_anim_player = $HideAnimationPlayer
 var main_font = preload("res://fonts/play_font.tres")
 var header_font = preload("res://fonts/credits_font.tres")
 
-onready var main_font_base_size = main_font.size
-onready var header_font_base_size = header_font.size
+onready var main_font_base_size = 40
+onready var header_font_base_size = 30
 
 const text = [
 	"AND TAK SOIDET GAMES",
@@ -26,7 +26,6 @@ const text = [
 	"Evy",
 	"Oksana",
 	"Sofa",
-	"Dari",
 	"",
 	"#3D Models",
 	"Oda",

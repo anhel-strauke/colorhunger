@@ -1,11 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/level/tiles/tile.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gfx/tiles/Rocks1.tscn" type="PackedScene" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 8.06581, 5.67454, 1.5218 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
 tile_width = 18.0
 
 [node name="Spatial" parent="." instance=ExtResource( 2 )]
-transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -0.208519, 0, -6.04746 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -0.220749, -0.00629807, -6.1184 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+input_ray_pickable = false
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.61826, -6.10827 )
+shape = SubResource( 1 )

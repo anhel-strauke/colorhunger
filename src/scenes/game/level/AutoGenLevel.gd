@@ -37,7 +37,11 @@ onready var item_resources = [
 ]
 
 onready var wall_resources = [
-preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
+	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks1.tscn"),
 	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2.tscn"),
 	preload("res://scenes/game/level/tiles/wall_tiles/WallRocks2Arm.tscn"),
 	#preload("res://scenes/game/level/tiles/Wall_1.tscn"),
@@ -108,18 +112,24 @@ func _make_floor(length: float):
 
 func _make_walls():
 	_make_walls_on(false)
-	_make_walls_on(true)
+	if level_index > 5:
+		_make_walls_on(true)
 
 
 func _make_walls_on(mirror: bool):
 	var wall_length = 0.0
 	while wall_length < real_level_length:
-		var wall_res = wall_resources[randi() % len(wall_resources)]
+		var max_res_n = len(wall_resources)
+		if level_index < 4:
+			max_res_n -= 1
+		elif level_index < 8 and mirror:
+			max_res_n -= 1
+		var wall_res = wall_resources[randi() % max_res_n]
 		var wall: Spatial = wall_res.instance()
 		self.add_child(wall)
 		wall.translation = Vector3(wall_length + wall.tile_width / 2, 0, 0)
 		if mirror:
-			wall.scale = Vector3(0.0, 0.0, -1.0)
+			wall.scale = Vector3(1.0, 1.0, -1.0)
 		wall_length += wall.tile_width
 		walls.append(wall)
 		

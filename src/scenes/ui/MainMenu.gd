@@ -38,4 +38,4 @@ func _on_CreditsButton_pressed():
 
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://scenes/game/Game.tscn")
+	get_tree().change_scene("res://scenes/ui/greeter.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/characters/Hero.tscn" type="PackedScene" id=2]
@@ -6,8 +6,86 @@
 [ext_resource path="res://scenes/game/level/AutoGenLevel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fonts/ui_small_font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://fonts/play_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://fonts/giant_font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://textures/ui/keys.png" type="Texture" id=8]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("VictoryOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "victory"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("VictoryOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("LevelBox:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 1.4, 1.7, 2, 2.3, 2.6, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("KeysHintBox:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.8, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("KeysHintBox:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 2.8, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true, false ]
+}
+
+[sub_resource type="Environment" id=5]
 background_mode = 1
 background_energy = 0.0
 ambient_light_energy = 0.0
@@ -44,20 +122,25 @@ anchor_bottom = 1.0
 
 [node name="HeroColor" type="ColorRect" parent="UI/VBoxContainer"]
 margin_right = 38.0
-margin_bottom = 339.0
+margin_bottom = 342.0
 size_flags_vertical = 3
 
 [node name="WinConLabel" type="Label" parent="UI/VBoxContainer"]
-margin_top = 343.0
+margin_top = 346.0
 margin_right = 38.0
-margin_bottom = 377.0
+margin_bottom = 373.0
 custom_fonts/font = ExtResource( 5 )
 
 [node name="WinConColor" type="ColorRect" parent="UI/VBoxContainer"]
-margin_top = 381.0
+margin_top = 377.0
 margin_right = 38.0
 margin_bottom = 720.0
 size_flags_vertical = 3
+
+[node name="VictoryOverlay" type="ColorRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Message" type="Control" parent="UI"]
 anchor_right = 1.0
@@ -76,9 +159,7 @@ margin_top = 63.0
 margin_right = 633.0
 margin_bottom = 360.0
 custom_fonts/font = ExtResource( 6 )
-text = "Congratulations!
-
-You have passed
+text = "You have passed
 the portal
 
 Click to continue."
@@ -104,8 +185,83 @@ Try again.
 Click to continue."
 align = 1
 
+[node name="DeathMessage" type="PanelContainer" parent="UI/Message"]
+visible = false
+anchor_left = 0.25
+anchor_top = 0.21
+anchor_right = 0.75
+anchor_bottom = 0.8
+
+[node name="Label" type="Label" parent="UI/Message/DeathMessage"]
+margin_left = 7.0
+margin_top = 88.0
+margin_right = 633.0
+margin_bottom = 335.0
+custom_fonts/font = ExtResource( 6 )
+text = "You Died.
+Don't touch the walls.
+Try again.
+
+Click to continue."
+align = 1
+
+[node name="OverlayAnimator" type="AnimationPlayer" parent="UI"]
+anims/start = SubResource( 1 )
+anims/victory = SubResource( 2 )
+
+[node name="LevelBox" type="CenterContainer" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LevelLabel" type="Label" parent="UI/LevelBox"]
+margin_left = 447.0
+margin_top = 318.0
+margin_right = 833.0
+margin_bottom = 402.0
+custom_fonts/font = ExtResource( 7 )
+text = "LEVEL 2"
+
+[node name="LevelBoxAnimator" type="AnimationPlayer" parent="UI"]
+anims/show = SubResource( 3 )
+
+[node name="KeysHintBox" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/KeysHintBox"]
+anchor_left = 0.23
+anchor_top = 0.45
+anchor_right = 0.8
+anchor_bottom = 0.6
+
+[node name="TextureRect" type="TextureRect" parent="UI/KeysHintBox/HBoxContainer"]
+margin_right = 181.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="UI/KeysHintBox/HBoxContainer"]
+margin_left = 185.0
+margin_top = 13.0
+margin_right = 729.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+custom_fonts/font = ExtResource( 6 )
+text = " – Move around and 
+   keep off the walls"
+
+[node name="KeysHintAnimator" type="AnimationPlayer" parent="UI"]
+anims/show = SubResource( 4 )
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 5 )
 [connection signal="color_updated" from="Hero" to="." method="_on_Hero_color_updated"]
 [connection signal="died" from="Hero" to="." method="_on_Hero_died"]
 [connection signal="win_condition_color_updated" from="LevelRoot/AutoGenLevel" to="." method="_on_AutoGenLevel_win_condition_color_updated"]
+[connection signal="animation_finished" from="UI/LevelBoxAnimator" to="." method="_on_LevelBoxAnimator_animation_finished"]
