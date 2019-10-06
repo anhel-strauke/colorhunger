@@ -8,9 +8,9 @@ export (Color) var color = Color(1.0, 0.0, 0.0)
 
 signal kill_me(item)
 
-func affect_hero(hero):
+func affect_hero(hero, direction):
 	print("RedSphere ", self.get_index(), " affects hero")
-	hero.add_hero_color(color)
+	hero.add_hero_color(color, direction)
 	$RedStaticBody.collision_layer = 0
 	$RedStaticBody.collision_mask = 0
 	$AnimationPlayer.play("destroy")

@@ -16,6 +16,9 @@ var lightDist2;
 var color = Vector3(1.0, 1.0, 1.0);
 var prevColor = color;
 var colorTransition = 1.0;
+var origScale;
+var flashTransition = 1.0;
+var flashDirection;
 
 func _ready():
 	material = get_surface_material(0).duplicate();
@@ -29,6 +32,8 @@ func _ready():
 		lightDist2 = light2.translation.length();
 	
 	setColor(Vector3(1.0, 1.0, 1.0));
+	origScale = scale
+	material.set_shader_param("flashDirection", Vector3(0, 0, 0));
 	
 
 var time = 0.0;
@@ -44,9 +49,13 @@ func setColor(newColor: Vector3, transition=0.0):
 	material.set_shader_param("color2", color);
 
 func moveLight():
-	light.translation = Vector3(lightDist * sin(time), lightDist * cos(time)/3.0, 0.0);
+	light.translation = Vector3(lightDist * sin(time), lightDist * cos(time)/3.0 + 4.0, 0.0);
 	if light2:
 		light2.translation = Vector3(lightDist2 * sin(time*3.0), 0.0, lightDist2 * cos(time*2.0));
+
+func flash(direction):
+	flashTransition = 0;
+	flashDirection = direction;
 
 # var colorSet = false;
 func _process(delta):
@@ -61,4 +70,13 @@ func _process(delta):
 		colorTransition = 1.0;
 	material.set_shader_param("colorMix", colorTransition);
 	moveLight();
+	
+	if flashTransition < 1.0:
+		var coeff = sin(PI*flashTransition)*2.0;
+		# scale = Vector3(origScale.x*(1 + coeff*flashDirection.x), origScale.y*(1 + coeff*flashDirection.y), origScale.x*(1 + coeff*flashDirection.z));
+		material.set_shader_param("flashDirection", Vector3(flashDirection.x*coeff, flashDirection.y*coeff, flashDirection.z*coeff));
+		flashTransition += delta*3.0
+	else:
+		scale = origScale
+		material.set_shader_param("flashDirection", Vector3(0, 0, 0));
 

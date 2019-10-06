@@ -61,8 +61,9 @@ func update_color():
 	emit_signal("color_updated", color)
 
 
-func add_hero_color(col: Color):
+func add_hero_color(col: Color, direction):
 	_colors.append(col)
+	$Model/Body/MeshInstance.flash(direction)
 	update_color()
 	print("Mix: ", color)
 

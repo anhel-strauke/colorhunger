@@ -89,7 +89,7 @@ func _process(delta):
 	var collide_res: KinematicCollision = hero.try_move(full_hero_delta)
 	if collide_res:
 		var collide_with = (collide_res.collider as Spatial).get_parent()
-		collide_with.affect_hero(hero)
+		collide_with.affect_hero(hero, collide_res.normal)
 	hero_rel_pos += hero_delta
 	var new_hero_rel_pos = hero.set_position(hero_rel_pos.x, hero_rel_pos.z)
 	if hero_delta.x > 0 and hero_rel_pos.x == new_hero_rel_pos.x:

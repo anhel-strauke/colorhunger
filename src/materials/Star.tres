@@ -6,6 +6,7 @@ render_mode blend_add;
 
 uniform sampler2D noize;
 uniform float time;
+uniform vec3 flashDirection;
 
 uniform vec3 color1;
 uniform vec3 color2;
@@ -20,6 +21,7 @@ void vertex() {
 	shift += texture(noize, VERTEX.zy).x;
 	//shift += (sin(time + VERTEX.x) + sin(time + VERTEX.y) + sin(time + VERTEX.z))*0.5;
 	VERTEX.xyz *= shift;
+	VERTEX.xyz += flashDirection*shift;
 	//VERTEX.x *= (1.0 - sin(time*VERTEX.x)/5.0);
 	//VERTEX.y *= (1.0 - sin(time*VERTEX.y)/5.0);
 	//VERTEX.z *= (1.0 - sin(time*VERTEX.z)/5.0);
@@ -39,6 +41,7 @@ noise = SubResource( 2 )
 [resource]
 shader = SubResource( 1 )
 shader_param/time = null
+shader_param/flashDirection = null
 shader_param/color1 = null
 shader_param/color2 = null
 shader_param/size = 2.0
