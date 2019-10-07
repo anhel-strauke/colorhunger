@@ -41,6 +41,10 @@ func _input(event):
 	if wait_for_any_key:
 		if event.is_pressed():
 			wait_for_any_key = false
+			$item_sound.stop()
+			$loose_sound.stop()
+			$death_sound.stop()
+			$win_sound.stop()
 			if current_message == win_message:
 				$"/root/singleton".level = $LevelRoot/AutoGenLevel.level_index + 1
 			if current_message:
@@ -49,6 +53,8 @@ func _input(event):
 			$"/root/singleton".transit_to_scene("res://scenes/game/Game.tscn")
 	if not controls_enabled:
 		return
+	if event.is_action_pressed("ui_cancel"):
+		$"/root/singleton".transit_to_scene("res://scenes/ui/MainMenu.tscn")
 	if event.is_action_pressed("ui_up"):
 		hero.v_accel = -hero_v_speed
 	if event.is_action_pressed("ui_down"):
@@ -136,11 +142,13 @@ func _process(delta):
 				anim_player.play("victory")
 				show_message(win_message)
 				$win_sound.play()
+				$AudioStreamPlayer.stop()
 			else:
 				victory_overlay.color = Color(0, 0, 0)
 				anim_player.play("victory")
 				show_message(loose_message)
 				$loose_sound.play()
+				$AudioStreamPlayer.stop()
 
 
 func distance(col1, col2):

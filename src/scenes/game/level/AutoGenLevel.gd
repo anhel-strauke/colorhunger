@@ -63,6 +63,9 @@ onready var decale_resources = [
 onready var random_colors = [
 	Color(1.0, 0.0, 0.0),
 	Color(0.0, 1.0, 0.0),
+	Color(0.0, 0.0, 1.0),
+	Color(1.0, 0.0, 0.0),
+	Color(0.0, 1.0, 0.0),
 	Color(0.0, 0.0, 1.0)
 ]
 
@@ -146,11 +149,13 @@ func _make_items(items_count: int):
 		var x_pos = rand_range(safe_dist, real_level_length - 12)
 		self.add_child(new_item)
 		if level_index == 1:
-			new_item.set_color(random_colors[0])
+			new_item.set_color(random_colors[1])
 		elif level_index == 2:
 			new_item.set_color(random_colors[randi() % 2])
 		else:
-			new_item.set_color(random_colors[randi() % len(random_colors)])
+			var index = randi() % len(random_colors)
+			print(index)
+			new_item.set_color(random_colors[index])
 		new_item.translation = Vector3(x_pos, 4.0, z_pos)
 		new_item.connect("kill_me", self, "kill_item")
 		items.append(new_item)
@@ -192,9 +197,10 @@ func randint(a: int, b: int) -> int:
 
 
 func _make_win_condition():
+	win_condition_colors.clear()
 	if level_index == 1:
 		win_condition_colors = {
-			random_colors[0]: 1	
+			random_colors[1]: 1	
 		}
 	else:
 		var total_items = len(items)
@@ -209,7 +215,9 @@ func _make_win_condition():
 			else:
 				win_condition_colors[colors[index]] = 1
 			colors.remove(index)
+	print(win_condition_colors)
 	win_condition_color = color_tool.mix_colors_dict(win_condition_colors)
+	print("WC:  ", win_condition_color)
 	emit_signal("win_condition_color_updated", win_condition_color)
 
 
@@ -223,11 +231,12 @@ func generate_level(length: float, items: int):
 
 
 func run_level(index: int):
+	randomize()
 	level_index = index
 	if index == 1:
-		generate_level(150, 5)
+		generate_level(90, 5)
 	elif index == 2:
-		generate_level(200, 10)
+		generate_level(140, 10)
 	else:
 		generate_level(200 + 10 * index, 25 + int(index / 2))
 
