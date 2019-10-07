@@ -52,7 +52,7 @@ onready var decale_resources = [
 	#preload("res://scenes/game/level/tiles/decale_test_1.tscn"),
 	#preload("res://scenes/game/level/tiles/decale_test_2.tscn")
 	preload("res://scenes/gfx/tiles/Roots.tscn"),
-	preload("res://scenes/gfx/tiles/Blood.tscn"),
+	#preload("res://scenes/gfx/tiles/Blood.tscn"),
 	preload("res://scenes/gfx/tiles/Flower.tscn"),
 	preload("res://scenes/gfx/tiles/FlowerBlood.tscn"),
 	preload("res://scenes/gfx/tiles/Mushrooms.tscn"),
@@ -182,13 +182,15 @@ func _make_portal():
 func _place_decales():
 	for tile in tiles:
 		if tile.accept_decales:
-			if randf() > 0.3:
+			if randf() > 0.0:  # TODO:
+			#for i in range(3):
 				var decale_res = decale_resources[randi() % len(decale_resources)]
 				var decale = decale_res.instance()
 				tile.add_child(decale)
 				var h_shift_max = tile.tile_width - decale.tile_width
 				var v_shift_max = tile.tile_height - decale.tile_height
-				decale.translation = Vector3(randf() * h_shift_max, 2.0, randf() * v_shift_max)
+				decale.translation = Vector3((randf() - 0.5) * h_shift_max, 0.0, (randf() - 0.5) * v_shift_max)
+				decale.rotation.y = randf() * 2.0 * PI;
  
 
 func randint(a: int, b: int) -> int:

@@ -6,6 +6,7 @@
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
 tile_width = 6.0
+accept_decales = true
 
 [node name="Spatial2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )

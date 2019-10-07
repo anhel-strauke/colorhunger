@@ -7,7 +7,7 @@
 [node name="Spatial" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.00694 )
+transform = Transform( -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0, 0.2, 0, 0, -1.00694 )
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 2 )
 script = ExtResource( 3 )
