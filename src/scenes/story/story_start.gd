@@ -14,3 +14,8 @@ func _ready():
 
 func run_menu():
 	get_tree().change_scene("res://scenes/ui/MainMenu.tscn")
+	
+func _input(event):
+	if event.is_action_released("ui_accept") or (event is InputEventMouseButton 
+			and event.is_pressed() and event.get_button_index() == BUTTON_LEFT):
+		run_menu()

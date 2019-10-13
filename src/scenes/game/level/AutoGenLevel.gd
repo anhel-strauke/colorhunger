@@ -102,7 +102,7 @@ func _make_floor(length: float):
 		var tile: Spatial = res.instance()
 		self.add_child(tile)
 		tiles.append(tile)
-		tile.translation = Vector3(real_level_length + tile.tile_width / 2, 0, 0)
+		tile.translation = Vector3(real_level_length + (tile.tile_width / 2) - 6.0, 0, 0)
 		real_level_length += tile.tile_width
 
 
@@ -136,6 +136,7 @@ func _make_items(items_count: int):
 	for item in items:
 		self.remove_child(item)
 		item.queue_free()
+	items.clear()
 	for i in range(items_count):
 		var new_item: Spatial = item_resources[0].instance()
 		var z_pos = rand_range(-3.2, 3.2)
@@ -195,9 +196,10 @@ func _make_win_condition():
 	win_condition_colors.clear()
 	if level_index == 1:
 		win_condition_colors = {
-			random_colors[1]: 1	
+			random_colors[1]: 1,
 		}
 	else:
+		randomize()
 		var total_items = len(items)
 		var num_items = randint(int(total_items / 4), int(total_items / 2))
 		var colors = []
@@ -216,10 +218,10 @@ func _make_win_condition():
 	emit_signal("win_condition_color_updated", win_condition_color)
 
 
-func generate_level(length: float, items: int):
+func generate_level(length: float, num_items: int):
 	_make_floor(length)
 	_make_walls()
-	_make_items(items)
+	_make_items(num_items)
 	_make_win_condition()
 	_make_portal()
 	_place_decales()

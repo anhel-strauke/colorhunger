@@ -160,6 +160,8 @@ func distance(col1, col2):
 func calc_distance_to_wincon(curr, wincon) -> float:
 	var from_white_to_wincon = distance(Color(1.0, 1.0, 1.0), wincon)
 	var from_curr_to_wincon = distance(curr, wincon)
+	if from_white_to_wincon == 0:
+		return 1.0
 	return abs(from_white_to_wincon - from_curr_to_wincon) / from_white_to_wincon
 
 
